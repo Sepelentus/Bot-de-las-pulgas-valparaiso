@@ -2,7 +2,7 @@ import { configDotenv } from "dotenv"; // Aqui se importa la config desde .env /
 
 configDotenv()
 
-import { Client, Events, GatewayIntentBits, SlashCommandBuilder } from "discord.js"; // Imports de la api de Discord //
+import { Client, Events, GatewayIntentBits, SlashCommandBuilder, Message } from "discord.js"; // Imports de la api de Discord //
 
 const client = new Client({                     // Las intents son las interacciones que va a utilizar el bot //
     intents: [
@@ -20,13 +20,25 @@ client.once(Events.ClientReady, c=> {           // Esto solo pasa una vez, por e
     .setName('sixto')                           // Le establece un nombre a la interaccion del slash //
     .setDescription('Responde con factores')    // Establece una descripcion sobre la accion que hara el comando //
 
+    const hors = new SlashCommandBuilder()
+    .setName('hors')
+    .setDescription('Envien los caballos')
+
     client.application.commands.create(sixto, "366409218972188702");
+    client.application.commands.create(hors, '366409218972188702');
 });
 
 client.on(Events.InteractionCreate, interaction => {
     if(!interaction.isChatInputCommand()) return;   
     if(interaction.commandName === "sixto"){    // Si la interaccion corresponde al comando sixto, responde matate //
         interaction.reply("matate")
+    }
+    if(interaction.commandName === "hors"){
+            interaction.reply('https://tenor.com/view/cleaning-horse-im-cleaning-cleaning-up-broom-gif-19548660')
+            interaction.channel.send('https://tenor.com/view/cleaning-horse-im-cleaning-cleaning-up-broom-gif-19548660')
+            interaction.channel.send('https://tenor.com/view/cleaning-horse-im-cleaning-cleaning-up-broom-gif-19548660')
+            interaction.channel.send('https://tenor.com/view/cleaning-horse-im-cleaning-cleaning-up-broom-gif-19548660')
+        
     }
     console.log(interaction);
 });
